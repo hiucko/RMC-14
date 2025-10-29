@@ -3,6 +3,16 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Dropship.Weapon;
 
+[Serializable, NetSerializable]
+public enum SpreadOffsetDirection
+{
+    None,
+    North,
+    South,
+    East,
+    West
+}
+
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 [Access(typeof(SharedDropshipWeaponSystem))]
 public sealed partial class DropshipTerminalWeaponsComponent : Component
@@ -45,6 +55,9 @@ public sealed partial class DropshipTerminalWeaponsComponent : Component
 
     [DataField, AutoNetworkedField]
     public NetEntity? SelectedSystem;
+
+    [DataField("spreadOffsetDirection"), ViewVariables(VVAccess.ReadWrite)]
+    public SpreadOffsetDirection SpreadOffsetDirection { get; set; } = SpreadOffsetDirection.None;
 
     [DataRecord]
     [Serializable, NetSerializable]

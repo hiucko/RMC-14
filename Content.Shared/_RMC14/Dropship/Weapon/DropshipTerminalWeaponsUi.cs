@@ -144,3 +144,10 @@ public sealed class DropShipTerminalWeaponsSpotlightToggleMsg(bool on) : BoundUs
 {
     public readonly bool On = on;
 }
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsSpreadOffsetMsg : BoundUserInterfaceMessage
+{
+    public bool First;
+    public SpreadOffsetDirection Direction;
+}

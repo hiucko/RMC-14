@@ -155,6 +155,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 subs.Event<DropshipTerminalWeaponsFultonSelectMsg>(OnWeaponsFultonSelect);
                 subs.Event<DropShipTerminalWeaponsParaDropTargetSelectMsg>(OnWeaponsParaDropSelect);
                 subs.Event<DropShipTerminalWeaponsSpotlightToggleMsg>(OnWeaponsSpotlightSelect);
+                subs.Event<DropshipTerminalWeaponsSpreadOffsetMsg>(OnWeaponsSpreadOffsetMsg);
             });
 
         Subs.CVar(_config, RMCCVars.RMCDropshipCASDebug, v => CasDebug = v, true);
@@ -181,6 +182,12 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _nextId = 1;
+        var terminals = EntityQueryEnumerator<DropshipTerminalWeaponsComponent>();
+        while (terminals.MoveNext(out var uid, out var _))
+        {
+            EnsureComp<DropshipTerminalWeaponsComponent>(uid).CurrentSpreadOffsetDirection = CurrentSpreadOffsetDirection.None;
+            Dirty(uid);
+        }
     }
 
     private void OnFlareSignalIgnition(Entity<FlareSignalComponent> ent, ref IgnitionEvent args)
@@ -631,6 +638,15 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         var spread = ev.Spread;
         var targetCoords = coordinates;
+        var pilotOffset = ent.Comp.SpreadOffsetDirection switch
+        {
+            SpreadOffsetDirection.None => Vector2.Zero,
+            SpreadOffsetDirection.North => new Vector2(0, 2f),
+            SpreadOffsetDirection.South => new Vector2(0, -2f),
+            SpreadOffsetDirection.East => new Vector2(2f, 0),
+            SpreadOffsetDirection.West => new Vector2(-2f, 0),
+            _ => Vector2.Zero
+        };
         if (spread != 0)
             targetCoords = targetCoords.Offset(_random.NextVector2(-spread, spread + 1));
 
@@ -825,6 +841,13 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         ent.Comp.FultonsPage = Math.Min(ent.Comp.Fultons.Count % 5, ent.Comp.FultonsPage + 1);
         Dirty(ent);
         RefreshWeaponsUI(ent);
+    }
+
+    private void OnWeaponsSpreadOffsetMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsSpreadOffsetMsg args)
+    {
+        ent.Comp.SpreadOffsetDirection = args.Direction;
+        Dirty(ent, ent.Comp);
+       RefreshWeaponsUI(ent);
     }
 
     private void OnWeaponsFultonSelect(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsFultonSelectMsg args)

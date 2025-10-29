@@ -234,6 +234,14 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
             _ => SendPredictedMessage(new DropShipTerminalWeaponsSpotlightToggleMsg(true)));
         var spotlightToggleOff = ButtonAction("disable",
             _ => SendPredictedMessage(new DropShipTerminalWeaponsSpotlightToggleMsg(false)));
+        var offsetNorth = ButtonAction("offset-north", _ => 
+            SendPredictedMessage(new DropshipTerminalWeaponsSetOffsetMsg(Direction.North)));
+        var offsetSouth = ButtonAction("offset-south", _ => 
+            SendPredictedMessage(new DropshipTerminalWeaponsSetOffsetMsg(Direction.South)));
+        var offsetEast = ButtonAction("offset-east", _ => 
+            SendPredictedMessage(new DropshipTerminalWeaponsSetOffsetMsg(Direction.East)));
+        var offsetWest = ButtonAction("offset-west", _ => 
+            SendPredictedMessage(new DropshipTerminalWeaponsSetOffsetMsg(Direction.West)));
 
 
         screen.ScreenLabel.Text = Loc.GetString("rmc-dropship-weapons-main-screen-text");
@@ -297,8 +305,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 AddTargets(out var previous, out var next);
                 screen.BottomRow.SetData(exit, five: next);
                 screen.TopRow.SetData(fire, five: previous);
-                // TODO RMC14 left two vector
-                screen.LeftRow.SetData(strike);
+                screen.LeftRow.SetData(strike, two: offsetNorth, three: offsetSouth, fourth: offsetWest, five: offsetEast);
                 screen.ScreenLabel.Text = TargetAcquisition();
                 break;
             }
