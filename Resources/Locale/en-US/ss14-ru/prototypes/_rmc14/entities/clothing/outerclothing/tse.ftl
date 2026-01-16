@@ -1,0 +1,10 @@
+ent-RMCArmorVestTSEPA = TSEPA armored vest
+    .desc = An TSEPA armored vest that protects against some damage.
+ent-RMCBaseTSEArmor = { "" }
+    .desc = { "" }
+ent-RMCArmourM4TSEPA = M4 pattern light TSEPA armour
+    .desc = A modified variant of the M4R armor, stripped of additional riot plating for civilian officer use. A 'TSEPA' badge is sewn into the chestplate.
+ent-RMCArmourM4TSEPAChief = M4 pattern inspector TSEPA armour
+    .desc = A modified variant of the M4 TSEPA armour to have the additional riot plating returned, featuring a golden insignia on the chestplate.
+ent-RMCJacketEIAFCombatJacket = EIAF combat jacket
+    .desc = A rugged, all-weather combat jacket issued to the Extrasolar Imperial Airborne Force. Designed for versatility, it serves as both a field garment and a lightweight layer of protection. Reinforced with ballistic fibers and treated for weather resistance, it offers limited defense against shrapnel and small arms fire while keeping paratroopers comfortable in harsh conditions. Its deep green color and durable fabric make it a staple for both active deployment and off-duty wear.
