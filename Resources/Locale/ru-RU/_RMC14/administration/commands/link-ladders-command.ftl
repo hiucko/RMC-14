@@ -1,1 +1,1 @@
-command-description-linkladders = Given a unique id and two ladders, links them together removing any currently connected links.
+command-description-linkladders = Создайте соединение двух лестниц предоставив уникальный ID. Связывает две лестницы вместе заменяя любые существущие связи
