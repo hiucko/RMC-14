@@ -1,2 +1,2 @@
-rmc-block-backpack-cant-backpack = You can't equip that on your back while wearing this armor.
-rmc-block-backpack-cant-other = You can't equip that while wearing a backpack.
+rmc-block-backpack-cant-backpack = Вы не можете надеть это себе на спину пока на вас надета эта броня.
+rmc-block-backpack-cant-other = Вы не можете экипировать это пока носите рюкзак или сумку.

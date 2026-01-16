@@ -1,2 +1,2 @@
-rmc-bulky-armor-target-unable = { $target } is not strong enough to equip { $armor }!
-rmc-bulky-armor-user-unable = You are not strong enough to equip { $armor }!
+rmc-bulky-armor-target-unable = { $target } недостаточно силён чтобы носить { $armor }!
+rmc-bulky-armor-user-unable = Вы недостаточно сильны чтобы носить { $armor }!
