@@ -128,7 +128,7 @@
     marines: true
     xenos: true
     liveUpdate: true
-  
+  - type: CEZLevelGhostMoverComponent # Z-levels
 
 - type: entity
   abstract: true

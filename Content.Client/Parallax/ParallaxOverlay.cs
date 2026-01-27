@@ -37,6 +37,13 @@ public sealed class ParallaxOverlay : Overlay
         if (args.MapId == MapId.Nullspace || _entManager.HasComponent<BiomeComponent>(_mapSystem.GetMapOrInvalid(args.MapId)))
             return false;
 
+// CrystalEdge draw parallax only for lowest zlevel
+	if (args.ViewportEye is ScalingViewport.ZEye zEye)
+	   return zEye.LowestDepth == zEye.Depth;
+	else
+	   return !_zLevel.TryMapDown(args.MapUid, out_);
+// CrystallEdge end
+
         return true;
     }
 
